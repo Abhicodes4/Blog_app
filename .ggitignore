@@ -13,8 +13,7 @@ media/
 # If you're using SQLite or other databases, ignore the db file:
 *.sqlite3
 
-# Django migrations:
-**/migrations/**
+
 
 # Python bytecode:
 *.py[cod]
