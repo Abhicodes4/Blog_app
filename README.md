@@ -26,6 +26,7 @@ Docker (optional, if using Docker for setup)
 ## Cloning the Repository
 
 git clone https://github.com/Abhicodes4/Blog_app.git
+
 cd Blog_app
 
 ## Setting up a Virtual Environment
