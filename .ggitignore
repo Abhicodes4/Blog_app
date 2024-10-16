@@ -13,8 +13,11 @@ media/
 # If you're using SQLite or other databases, ignore the db file:
 *.sqlite3
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3a2c47836cdeffc589be50e2e4c129c797d00531
 # Python bytecode:
 *.py[cod]
 
