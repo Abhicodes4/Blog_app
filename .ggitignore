@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+env/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# If you're using SQLite or other databases, ignore the db file:
+*.sqlite3
+
+# Django migrations:
+**/migrations/**
+
+# Python bytecode:
+*.py[cod]
+
+# Static and media files:
+static/
+media/
+
+# Environment variables:
+.env

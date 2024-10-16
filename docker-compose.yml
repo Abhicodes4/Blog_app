@@ -1,0 +1,39 @@
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: blogapp         
+      POSTGRES_USER: postgres             
+      POSTGRES_PASSWORD: aeroplane12          
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 project6.wsgi:application
+    volumes:
+        - .:/app  # Mount the current directory (project6) to /app in the container
+        - static_volume:/app/staticfiles
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG="True"                              
+      - SECRET_KEY=django-insecure-oq%uz6zqqx53!lo*t_8y8*@r+rf)&z)&d&h(tat5u%zd9cfs5
+      - POSTGRES_DB=blogapp          
+      - POSTGRES_USER=postgres                
+      - POSTGRES_PASSWORD= aeroplane12        
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+  static_volume:
+
+networks:
+  app_network:

@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <link href="{% static 'css/output.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .relative {
+      position: relative;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 10px; 
+      top: calc(50% + 13px);
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #4B5563; 
+    }
+  </style>
+</head>
+<body class="bg-gray-100 h-screen">
+  <div class="flex items-center justify-center h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+      <h2 class="text-2xl font-bold text-center text-gray-700 mb-4">Sign Up</h2>
+
+      {% for message in messages %}
+        <div class="mb-4 text-red-600 text-sm text-center">
+          {{ message }}
+        </div>
+      {% endfor %}
+
+      <form action="/signup/" method="POST">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">First Name</label>
+          <input class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500" id="first_name" type="text" name="fname" placeholder="Enter your first name" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+          <input class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500" id="username" type="text" name="uname" placeholder="Enter your username" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+          <input class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500" id="email" type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-6 relative">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+          <input class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500 pr-10" id="password" type="password" name="pass1" placeholder="Enter your password" required>
+          <i class="fas fa-eye eye-icon" id="eye-icon"></i>
+        </div>
+
+        <div class="mb-6 relative">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">Confirm Password</label>
+          <input class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500 pr-10" id="confirm_password" type="password" name="pass2" placeholder="Confirm your password" required>
+          <i class="fas fa-eye eye-icon" id="confirm-eye-icon"></i>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign Up</button>
+        </div>
+      </form>
+
+      <p class="text-center text-gray-500 text-sm mt-4">
+        Already have an account? <a class="text-blue-500 hover:text-blue-800" href="/">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+
+    const togglePassword = document.getElementById('eye-icon');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const isPasswordVisible = passwordInput.type === 'text';
+      passwordInput.type = isPasswordVisible ? 'password' : 'text';
+      togglePassword.classList.toggle('fa-eye-slash', isPasswordVisible);
+      togglePassword.classList.toggle('fa-eye', !isPasswordVisible);
+    });
+
+    // Toggle confirm password visibility
+    const toggleConfirmPassword = document.getElementById('confirm-eye-icon');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+
+    toggleConfirmPassword.addEventListener('click', () => {
+      const isConfirmPasswordVisible = confirmPasswordInput.type === 'text';
+      confirmPasswordInput.type = isConfirmPasswordVisible ? 'password' : 'text';
+      toggleConfirmPassword.classList.toggle('fa-eye-slash', isConfirmPasswordVisible);
+      toggleConfirmPassword.classList.toggle('fa-eye', !isConfirmPasswordVisible);
+    });
+  </script>
+</body>
+</html>
